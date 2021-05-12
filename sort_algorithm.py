@@ -80,8 +80,30 @@ def quick_sort(nums):
     return quick_sort(less) + mid + more
 
 
+def shell_sort(nums):
+    """
+
+    :param nums: List[int]
+    :return: List[int]
+    """
+    length = len(nums)
+    gap = length // 2
+    while gap > 0:
+        for i in range(gap, length):  # 代码实现是多个分组交替执行
+            gap_idx = i
+            while gap_idx - gap >= 0:  # 相当于插入排序
+                if nums[gap_idx] < nums[gap_idx - gap]:
+                    nums[gap_idx], nums[gap_idx - gap] = nums[gap_idx - gap], nums[gap_idx]
+                else:
+                    break
+                gap_idx -= gap
+        gap //= 2
+    return nums
+
+
 if __name__ == '__main__':
-    num_list = [random.randint(0, 100) for _ in range(0, 8)]
+    length_of_nums = 10
+    num_list = [random.randint(0, 8 * length_of_nums) for _ in range(0, length_of_nums)]
     print('original nums:', num_list)
     start_time = time.time()
 
@@ -89,7 +111,7 @@ if __name__ == '__main__':
     # selection_sort(num_list)
     # insert_sort(num_list)
     # out = merge_sort(num_list)
-    out = quick_sort(num_list)
-
+    # out = quick_sort(num_list)
+    out = shell_sort(num_list)
     print('use time:', time.time() - start_time)
     print('sorted nums:', out)
