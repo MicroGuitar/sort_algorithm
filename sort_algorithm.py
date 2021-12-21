@@ -77,7 +77,7 @@ def quick_sort(nums):
     less = [x for x in nums if x < pivot]
     mid = [x for x in nums if x == pivot]
     more = [x for x in nums if x > pivot]
-    return quick_sort(less) + mid + more
+    return quick_sort(less) + mid + quick_sort(more)
 
 
 def shell_sort(nums):
